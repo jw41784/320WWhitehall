@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guest guide for 320 West Whitehall, State College, PA - Your home in Happy Valley">
+    <title>320 West Whitehall - Guest Guide</title>
+    
+    <style>
+        :root {
+            --navy: #001E44;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --text-gray: #495057;
+            --medium-gray: #6C757D;
+            --accent-blue: #0066CC;
+            --success: #28A745;
+            --warning: #FFC107;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+            color: var(--text-gray);
+            line-height: 1.6;
+            background: var(--white);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+        
+        header {
+            background: var(--navy);
+            color: var(--white);
+            padding: 24px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .nav-toggle {
+            display: block;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--navy);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        nav.active {
+            display: block;
+        }
+        
+        nav ul {
+            list-style: none;
+        }
+        
+        nav a {
+            display: block;
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: background 0.3s;
+        }
+        
+        nav a:hover, nav a:focus {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, #003366 100%);
+            color: var(--white);
+            padding: 48px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        
+        .quick-info {
+            padding: 32px 0;
+            background: var(--light-gray);
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 24px;
+        }
+        
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .card-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--navy);
+            color: var(--white);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+        
+        .card h3 {
+            color: var(--navy);
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .card p {
+            color: var(--text-gray);
+            margin-bottom: 4px;
+        }
+        
+        .card .highlight {
+            font-weight: 600;
+            color: var(--navy);
+            font-size: 1.1rem;
+            display: block;
+            margin-top: 8px;
+        }
+        
+        section {
+            padding: 32px 0;
+        }
+        
+        section:nth-child(even) {
+            background: var(--light-gray);
+        }
+        
+        h2 {
+            color: var(--navy);
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--navy);
+        }
+        
+        h3 {
+            color: var(--navy);
+            font-size: 1.3rem;
+            margin: 24px 0 16px;
+        }
+        
+        .collapsible {
+            background: var(--white);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .collapsible-header {
+            padding: 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 1.1rem;
+            color: var(--navy);
+            font-weight: 600;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        
+        .collapsible-header:hover {
+            background: var(--light-gray);
+        }
+        
+        .collapsible-header::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .collapsible.active .collapsible-header::after {
+            transform: rotate(45deg);
+        }
+        
+        .collapsible-content {
+            display: none;
+            padding: 0 16px 16px;
+        }
+        
+        .collapsible.active .collapsible-content {
+            display: block;
+        }
+        
+        .list-item {
+            padding: 12px;
+            border-left: 3px solid var(--navy);
+            margin-bottom: 12px;
+            background: var(--white);
+        }
+        
+        .list-item strong {
+            color: var(--navy);
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .list-item a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .list-item a:hover {
+            text-decoration: underline;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--navy);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        
+        .button:hover {
+            opacity: 0.9;
+        }
+        
+        .emergency {
+            background: #FFF3CD;
+            border-left: 4px solid var(--warning);
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+        
+        .emergency strong {
+            color: #856404;
+        }
+        
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            padding: 32px 0;
+            text-align: center;
+            margin-top: 48px;
+        }
+        
+        .paw-print {
+            font-size: 1.5rem;
+            margin: 0 8px;
+            opacity: 0.8;
+        }
+        
+        @media (min-width: 768px) {
+            .nav-toggle {
+                display: none;
+            }
+            
+            nav {
+                display: block;
+                position: static;
+                background: none;
+                border: none;
+            }
+            
+            nav ul {
+                display: flex;
+                gap: 24px;
+            }
+            
+            nav a {
+                padding: 8px 16px;
+                border: none;
+                border-radius: 4px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media print {
+            header, nav, footer, .nav-toggle {
+                display: none;
+            }
+            
+            .collapsible-content {
+                display: block !important;
+            }
+            
+            .collapsible-header::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>320 West Whitehall</h1>
+                <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+                <nav>
+                    <ul>
+                        <li><a href="#quick-info">Quick Info</a></li>
+                        <li><a href="#house-manual">House Manual</a></li>
+                        <li><a href="#local-guide">Local Guide</a></li>
+                        <li><a href="#food-drink">Food & Drink</a></li>
+                        <li><a href="#activities">Activities</a></li>
+                        <li><a href="#game-day">Game Day</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h2>Welcome to Happy Valley! 🏔️</h2>
+            <p>Your home away from home in State College, PA</p>
+            <p>320 West Whitehall Road, State College, PA 16801</p>
+        </div>
+    </section>
+    
+    <section id="quick-info" class="quick-info">
+        <div class="container">
+            <h2>Essential Information</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">📶</div>
+                    <h3>WiFi</h3>
+                    <p>Network Name:</p>
+                    <span class="highlight">WhitehallGuest</span>
+                    <p>Password:</p>
+                    <span class="highlight">WelcomePSU2024</span>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🔑</div>
+                    <h3>Check-In/Out</h3>
+                    <p>Check-in: After 3:00 PM</p>
+                    <p>Check-out: Before 11:00 AM</p>
+                    <span class="highlight">Door Code: #2024</span>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🚗</div>
+                    <h3>Parking</h3>
+                    <p>Park in designated spot #320</p>
+                    <p>Additional parking available on street</p>
+                    <span class="highlight">Permit in kitchen drawer</span>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">🚨</div>
+                    <h3>Emergency</h3>
+                    <p>Emergency: <strong>911</strong></p>
+                    <p>Host: <strong>(814) 555-0320</strong></p>
+                    <span class="highlight">First aid kit under sink</span>
+                </div>
+            </div>
+            
+            <div class="emergency">
+                <strong>⚠️ Important:</strong> In case of emergency, call 911 first. Then notify your host. The nearest hospital is Mount Nittany Medical Center (814-231-7000), located at 1800 E Park Ave, about 5 minutes away.
+            </div>
+        </div>
+    </section>
+    
+    <section id="house-manual">
+        <div class="container">
+            <h2>House Manual</h2>
+            
+            <div class="collapsible">
+                <button class="collapsible-header">Kitchen & Appliances</button>
+                <div class="collapsible-content">
+                    <div class="list-item">
+                        <strong>Coffee Maker</strong>
+                        Keurig machine - K-cups provided in cabinet above. Press power, wait for heating, insert pod, select cup size.
+                    </div>
+                    <div class="list-item">
+                        <strong>Dishwasher</strong>
+                        Detergent under sink. Run on "Normal" cycle. Please start before checkout if used.
+                    </div>
+                    <div class="list-item">
+                        <strong>Microwave</strong>
+                        Standard operation. Please cover food to prevent splatters.
+                    </div>
+                    <div class="list-item">
+                        <strong>Stove/Oven</strong>
+                        Electric range. All cookware in lower cabinets. Baking sheets in drawer below oven.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collapsible">
+                <button class="collapsible-header">Climate Control</button>
+                <div class="collapsible-content">
+                    <div class="list-item">
+                        <strong>Thermostat</strong>
+                        Located in hallway. Set between 68-78°F. System is on AUTO mode.
+                    </div>
+                    <div class="list-item">
+                        <strong>Windows</strong>
+                        Feel free to open for fresh air. Please close and lock before leaving.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collapsible">
+                <button class="collapsible-header">Entertainment</button>
+                <div class="collapsible-content">
+                    <div class="list-item">
+                        <strong>Smart TV</strong>
+                        Roku TV with Netflix, Hulu, Disney+ logged in. Feel free to use or log into your accounts.
+                    </div>
+                    <div class="list-item">
+                        <strong>Bluetooth Speaker</strong>
+                        JBL speaker in living room. Press power button to turn on and connect via Bluetooth.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collapsible">
+                <button class="collapsible-header">House Rules</button>
+                <div class="collapsible-content">
+                    <div class="list-item">
+                        <strong>Quiet Hours</strong>
+                        Please be considerate of neighbors between 10 PM - 8 AM
+                    </div>
+                    <div class="list-item">
+                        <strong>No Smoking</strong>
+                        This is a smoke-free property. Smoking permitted outside only.
+                    </div>
+                    <div class="list-item">
+                        <strong>Pets</strong>
+                        Pets allowed with prior approval. Please clean up after your pet.
+                    </div>
+                    <div class="list-item">
+                        <strong>Trash & Recycling</strong>
+                        Bins at side of house. Pickup is Tuesday morning. Please take out if staying Monday night.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="local-guide">
+        <div class="container">
+            <h2>Quick Essentials</h2>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>🛒 Groceries</h3>
+                    <p><a href="https://goo.gl/maps/JTzC2Z8XyMhx9EGT9" target="_blank">Wegmans</a> - Best selection</p>
+                    <p><a href="https://goo.gl/maps/HyPLrsu4qHRBvYxq8" target="_blank">Trader Joe's</a> - Great prices</p>
+                    <p>Weis & Giant - Nearby options</p>
+                </div>
+                
+                <div class="card">
+                    <h3>☕ Quick Coffee</h3>
+                    <p><a href="https://goo.gl/maps/3V9j1Yx9sJfovTLo6" target="_blank">Elixr Coffee</a> - Downtown</p>
+                    <p><a href="https://goo.gl/maps/9gfz2KUZroMoyTMo9" target="_blank">Café Lemont</a> - Cozy spot</p>
+                    <p><a href="https://goo.gl/maps/MEseP7c3pXeTQZy6A" target="_blank">Rothrock Coffee</a> - Modern</p>
+                </div>
+                
+                <div class="card">
+                    <h3>🍜 Quick Eats</h3>
+                    <p><a href="https://goo.gl/maps/vW3z8X6acn2UQszj6" target="_blank">Cozy Thai</a> - Thai bistro</p>
+                    <p><a href="https://goo.gl/maps/F7QMyN6sWfwD48F67" target="_blank">Tasty K</a> - Korean</p>
+                    <p><a href="https://goo.gl/maps/mYbzJzHzD4U8CGgu9" target="_blank">Little Szechuan</a> - Chinese</p>
+                </div>
+                
+                <div class="card">
+                    <h3>🍺 Breweries</h3>
+                    <p><a href="https://goo.gl/maps/mqzHuU9kSwxHz7hY7" target="_blank">Voodoo Brewing</a> - Downtown</p>
+                    <p><a href="https://goo.gl/maps/N6cLRsm8bQpzApFR9" target="_blank">Axemann Brewery</a> - Bellefonte</p>
+                    <p><a href="https://goo.gl/maps/VHgXjLrR8CEgHiTb8" target="_blank">Otto's Pub</a> - Local favorite</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="food-drink">
+        <div class="container">
+            <h2>Food & Drink Guide</h2>
+            
+            <div class="collapsible active">
+                <button class="collapsible-header">☕ Coffee & Cafés</button>
+                <div class="collapsible-content">
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/3V9j1Yx9sJfovTLo6" target="_blank">Elixr Coffee</a></strong>
+                        Minimalist, high-quality espresso downtown. Perfect for coffee enthusiasts.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/9gfz2KUZroMoyTMo9" target="_blank">Café Lemont</a></strong>
+                        Artsy, homey atmosphere. Great for a quiet morning or afternoon work session.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/MEseP7c3pXeTQZy6A" target="_blank">Rothrock Coffee</a></strong>
+                        Modern, light-filled café with house-roasted beans. Excellent pastries.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/v7Jp6E3LrZn9UjvC7" target="_blank">Duck Donuts</a></strong>
+                        Made-to-order donuts with coffee. Fun breakfast spot for families.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collapsible">
+                <button class="collapsible-header">🍽️ Restaurants</button>
+                <div class="collapsible-content">
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/vW3z8X6acn2UQszj6" target="_blank">Cozy Thai Bistro</a></strong>
+                        Fresh, authentic Thai cuisine. Popular for both dine-in and takeout. Try the pad thai!
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/F7QMyN6sWfwD48F67" target="_blank">Tasty K</a></strong>
+                        Authentic Korean comfort food. Don't miss the bibimbap and Korean fried chicken.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/5UJgC5exAqV7fsgJ7" target="_blank">The Tavern</a></strong>
+                        Historic Penn State institution. Upscale American dining, perfect for special occasions.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/hT4ni6JQkx5By6cu6" target="_blank">The Corner Room</a></strong>
+                        Classic American fare and a Penn State tradition. Great for families and groups.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/zr4hVCHkz3E2" target="_blank">Faccia Luna</a></strong>
+                        Brick oven pizza and Italian cuisine. Excellent wine selection.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/mYbzJzHzD4U8CGgu9" target="_blank">Little Szechuan</a></strong>
+                        Authentic Sichuan cuisine. Be prepared for spice! Try the mapo tofu.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/LX81wvjJUTDNnEKp7" target="_blank">RE Farm Café</a></strong>
+                        Farm-to-table fine dining with sweeping valley views. Reservations recommended.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collapsible">
+                <button class="collapsible-header">🍻 Breweries & Bars</button>
+                <div class="collapsible-content">
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/mqzHuU9kSwxHz7hY7" target="_blank">Voodoo Brewing Co.</a></strong>
+                        Quirky craft beers in downtown State College. Great atmosphere and selection.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/N6cLRsm8bQpzApFR9" target="_blank">Axemann Brewery</a></strong>
+                        Industrial-chic brewery in Bellefonte with riverside setting. Worth the short drive.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/VHgXjLrR8CEgHiTb8" target="_blank">Otto's Pub & Brewery</a></strong>
+                        Local institution with extensive tap list and hearty pub food.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/vDmr4gUddjF9PKDTA" target="_blank">Happy Valley Brewing Co.</a></strong>
+                        Barn-style brewery with outdoor fire pits and live music on weekends.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/Ns6pgmFJv9hRPVxV9" target="_blank">Big Spring Spirits</a></strong>
+                        Craft cocktails and spirits in Bellefonte's historic match factory.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="activities">
+        <div class="container">
+            <h2>Things to Do</h2>
+            
+            <div class="collapsible">
+                <button class="collapsible-header">🥾 Hiking & Nature</button>
+                <div class="collapsible-content">
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/Ef1YkDtuFb72" target="_blank">Mount Nittany</a></strong>
+                        Iconic hike with overlooks of Beaver Stadium and the valley. 5 miles round trip, moderate difficulty.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/WXoixFbYNYL2" target="_blank">Musser Gap</a></strong>
+                        Gateway to Rothrock Forest. Multiple trail options from easy to challenging.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/f6nnkRQ5YzK2" target="_blank">Shingletown Gap</a></strong>
+                        Beautiful streamside hiking with wooded loops and ridge climbs.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/gbLbLrrRt6n" target="_blank">Colyer Lake Trail</a></strong>
+                        Easy 2.5-mile loop around a peaceful lake. Great for families.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/uypA4oEfM6t" target="_blank">Black Moshannon State Park</a></strong>
+                        Unique bog ecosystem with boardwalks. 25 minutes west, worth the drive.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collapsible">
+                <button class="collapsible-header">🎭 Attractions & Activities</button>
+                <div class="collapsible-content">
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/5rXpwcH7rY52" target="_blank">The Arboretum at Penn State</a></strong>
+                        Free botanical gardens with beautiful walking paths and seasonal displays.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/3UvwwV2sfpQ2" target="_blank">Downtown State College</a></strong>
+                        Walkable downtown with shops, restaurants, and street art.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/nmUhdjMmv9m" target="_blank">Bellefonte</a></strong>
+                        Charming Victorian town with antique shops, breweries, and historic architecture.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/2XjCybY9UuC2" target="_blank">Discovery Space</a></strong>
+                        Interactive science museum perfect for families with children.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/ubVk9gGEGKr" target="_blank">Tussey Mountain</a></strong>
+                        Skiing in winter; concerts, festivals, and drive-in movies in summer.
+                    </div>
+                    <div class="list-item">
+                        <strong><a href="https://goo.gl/maps/6Fm82oJroGS2" target="_blank">Penn's Cave</a></strong>
+                        America's only all-water cavern tour. Also features wildlife park.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collapsible">
+                <button class="collapsible-header">🧺 Longer Stay Essentials</button>
+                <div class="collapsible-content">
+                    <div class="list-item">
+                        <strong>Laundromats</strong>
+                        <a href="https://goo.gl/maps/yicH3qja2t72" target="_blank">Wash & Dri</a> (256 W Hamilton Ave) | 
+                        <a href="https://goo.gl/maps/NhEzy7Gy9oF2" target="_blank">Westside Laundry</a> (127 N Sparks St)
+                    </div>
+                    <div class="list-item">
+                        <strong>Coworking Spaces</strong>
+                        <a href="https://goo.gl/maps/NxXaprcY2QF2" target="_blank">Happy Valley LaunchBox</a> - Free community space | 
+                        <a href="https://goo.gl/maps/pmkqQJbzHFs" target="_blank">New Leaf Initiative</a> - Community focused
+                    </div>
+                    <div class="list-item">
+                        <strong>Farmers Markets</strong>
+                        <a href="https://goo.gl/maps/djNYfKPh1dy" target="_blank">North Atherton</a> - Saturdays, May-Nov | 
+                        <a href="https://goo.gl/maps/9n2HjjHJHJ42" target="_blank">Downtown</a> - Fridays, year-round
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="game-day">
+        <div class="container">
+            <h2>🏈 Penn State Football Game Days</h2>
+            
+            <div class="emergency">
+                <strong>Game Day Alert:</strong> Downtown and campus will be extremely busy on home game days. Plan accordingly!
+            </div>
+            
+            <div class="list-item">
+                <strong>Tailgating</strong>
+                Starts early morning (some as early as 6 AM). Amazing atmosphere throughout campus.
+            </div>
+            <div class="list-item">
+                <strong>Parking</strong>
+                Expect special event rates ($40-60). Arrive very early or use shuttles.
+            </div>
+            <div class="list-item">
+                <strong>Shuttles</strong>
+                <a href="https://catabus.com" target="_blank">CATA game-day buses</a> - $2.50 one-way, $7 day pass. Much easier than driving!
+            </div>
+            <div class="list-item">
+                <strong>Restaurants</strong>
+                Book reservations weeks in advance for game weekends. Many places have special menus.
+            </div>
+            <div class="list-item">
+                <strong>Pro Tip</strong>
+                Even without tickets, the downtown atmosphere during games is electric. Watch at a sports bar for the full experience!
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <h2>📅 Recommended Itineraries</h2>
+            
+            <div class="collapsible">
+                <button class="collapsible-header">Weekend Visit (1-3 nights)</button>
+                <div class="collapsible-content">
+                    <div class="list-item">
+                        <strong>Day 1</strong>
+                        Morning coffee at Elixr or Café Lemont, explore The Arboretum, lunch downtown, afternoon Mount Nittany hike, dinner at Cozy Thai or Tasty K
+                    </div>
+                    <div class="list-item">
+                        <strong>Day 2</strong>
+                        Breakfast at Duck Donuts, visit Penn State campus, lunch at The Corner Room, explore downtown shops, dinner and drinks at Voodoo Brewing or Otto's Pub
+                    </div>
+                    <div class="list-item">
+                        <strong>Day 3</strong>
+                        Morning hike at Colyer Lake, brunch at RE Farm Café, visit Bellefonte for antique shopping and Big Spring Spirits
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collapsible">
+                <button class="collapsible-header">Extended Stay (1-3 weeks)</button>
+                <div class="collapsible-content">
+                    <div class="list-item">
+                        <strong>Week 1</strong>
+                        Establish routine with morning coffee spots, explore all major hiking trails, try different restaurants each night, visit The Arboretum and Discovery Space
+                    </div>
+                    <div class="list-item">
+                        <strong>Week 2</strong>
+                        Day trip to Penn's Cave, explore Bellefonte thoroughly, attend local events or Penn State activities, try all the breweries
+                    </div>
+                    <div class="list-item">
+                        <strong>Week 3</strong>
+                        Visit Black Moshannon State Park, explore Tussey Mountain activities, attend farmers markets, discover hidden gems in surrounding towns
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collapsible">
+                <button class="collapsible-header">Long-term Stay (1+ month)</button>
+                <div class="collapsible-content">
+                    <div class="list-item">
+                        <strong>Establish Routines</strong>
+                        Find your favorite coffee shop for work, join Happy Valley LaunchBox for coworking, weekly farmers market visits
+                    </div>
+                    <div class="list-item">
+                        <strong>Explore Deeply</strong>
+                        Complete all major hiking trails, try every recommended restaurant, attend Penn State sporting events and cultural activities
+                    </div>
+                    <div class="list-item">
+                        <strong>Become a Local</strong>
+                        Get to know shop owners downtown, find your regular spots, explore seasonal activities, join community events
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>Enjoy your stay in Happy Valley! <span class="paw-print">🐾</span></p>
+            <p>© 2024 - 320 West Whitehall</p>
+            <p>Questions? Text your host at (814) 555-0320</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile navigation toggle
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Close mobile nav
+                    document.querySelector('nav').classList.remove('active');
+                    // Scroll to target
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Collapsible sections
+        document.querySelectorAll('.collapsible-header').forEach(header => {
+            header.addEventListener('click', function() {
+                this.parentElement.classList.toggle('active');
+            });
+        });
+        
+        // Service worker for offline capability (basic)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(() => {
+                    // Service worker registration failed, app will still work online
+                });
+            });
+        }
+    </script>
+</body>
+</html>
