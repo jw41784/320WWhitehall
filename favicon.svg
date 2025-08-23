@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Penn State inspired colors -->
+  <defs>
+    <style>
+      .navy { fill: #001E44; }
+      .white { fill: #FFFFFF; }
+      .accent { fill: #0066CC; }
+    </style>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="16" class="navy"/>
+  
+  <!-- Simplified lion head silhouette -->
+  <g class="white">
+    <!-- Main head shape -->
+    <ellipse cx="16" cy="15" rx="10" ry="8"/>
+    
+    <!-- Ears -->
+    <ellipse cx="11" cy="9" rx="2.5" ry="3" transform="rotate(-20 11 9)"/>
+    <ellipse cx="21" cy="9" rx="2.5" ry="3" transform="rotate(20 21 9)"/>
+    
+    <!-- Inner ears -->
+    <ellipse cx="11.5" cy="9.5" rx="1.2" ry="1.8" transform="rotate(-20 11.5 9.5)" class="navy"/>
+    <ellipse cx="20.5" cy="9.5" rx="1.2" ry="1.8" transform="rotate(20 20.5 9.5)" class="navy"/>
+    
+    <!-- Muzzle -->
+    <ellipse cx="16" cy="19" rx="4" ry="3"/>
+    
+    <!-- Eyes -->
+    <circle cx="13" cy="14" r="1.5" class="navy"/>
+    <circle cx="19" cy="14" r="1.5" class="navy"/>
+    
+    <!-- Eye highlights -->
+    <circle cx="13.3" cy="13.7" r="0.4" class="white"/>
+    <circle cx="19.3" cy="13.7" r="0.4" class="white"/>
+    
+    <!-- Nose -->
+    <ellipse cx="16" cy="17.5" rx="1" ry="0.7" class="navy"/>
+    
+    <!-- Mouth line -->
+    <path d="M16 18.5 Q14 20 12 19.5 M16 18.5 Q18 20 20 19.5" 
+          stroke="#001E44" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+    
+    <!-- Mane suggestion -->
+    <path d="M8 16 Q6 12 8 8 Q10 6 12 8" 
+          stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M24 16 Q26 12 24 8 Q22 6 20 8" 
+          stroke="#FFFFFF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Small paw print accent -->
+  <g class="accent" transform="translate(24,24) scale(0.3)">
+    <circle cx="0" cy="-2" r="1.5"/>
+    <circle cx="-2" cy="0" r="1.2"/>
+    <circle cx="2" cy="0" r="1.2"/>
+    <circle cx="0" cy="2" r="1.2"/>
+    <ellipse cx="0" cy="4" rx="2" ry="1.5"/>
+  </g>
+</svg>

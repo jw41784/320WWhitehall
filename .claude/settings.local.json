@@ -6,7 +6,10 @@
       "Bash(git commit:*)",
       "Bash(gh repo create:*)",
       "Bash(gh api:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(git push:*)",
+      "WebFetch(domain:jw41784.github.io)",
+      "Bash(git checkout:*)"
     ],
     "deny": [],
     "ask": []
