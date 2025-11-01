@@ -32,9 +32,6 @@ header {
     background: var(--navy);
     color: var(--white);
     padding: 24px 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
