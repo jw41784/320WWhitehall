@@ -1,11 +1,3 @@
-// Mobile navigation toggle
-document.querySelector('.nav-toggle').addEventListener('click', function() {
-    const nav = document.querySelector('nav');
-    const isExpanded = this.getAttribute('aria-expanded') === 'true';
-    nav.classList.toggle('active');
-    this.setAttribute('aria-expanded', !isExpanded);
-});
-
 // Smooth scrolling for navigation links
 document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -16,9 +8,6 @@ document.querySelectorAll('nav a').forEach(anchor => {
             e.preventDefault();
             const target = document.querySelector(href);
             if (target) {
-                // Close mobile nav
-                document.querySelector('nav').classList.remove('active');
-
                 // Try smooth scroll, fallback to regular scroll
                 try {
                     target.scrollIntoView({
