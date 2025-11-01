@@ -87,6 +87,7 @@ nav a:hover, nav a:focus {
 .hero h2 {
     font-size: 2rem;
     margin-bottom: 16px;
+    color: var(--white);
 }
 
 .hero p {
