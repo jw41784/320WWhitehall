@@ -9,368 +9,17 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.svg">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon.svg">
     <link rel="shortcut icon" href="favicon.svg">
-    
-    <style>
-        :root {
-            --navy: #001E44;
-            --white: #FFFFFF;
-            --light-gray: #F5F5F5;
-            --text-gray: #495057;
-            --medium-gray: #6C757D;
-            --accent-blue: #0066CC;
-            --success: #28A745;
-            --warning: #FFC107;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-            color: var(--text-gray);
-            line-height: 1.6;
-            background: var(--white);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 16px;
-        }
-        
-        header {
-            background: var(--navy);
-            color: var(--white);
-            padding: 24px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-        
-        .nav-toggle {
-            display: block;
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 8px;
-        }
-        
-        nav {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: var(--navy);
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        nav.active {
-            display: block;
-        }
-        
-        nav ul {
-            list-style: none;
-        }
-        
-        nav a {
-            display: block;
-            color: var(--white);
-            text-decoration: none;
-            padding: 12px 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: background 0.3s;
-        }
-        
-        nav a:hover, nav a:focus {
-            background: rgba(255,255,255,0.1);
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, var(--navy) 0%, #003366 100%);
-            color: var(--white);
-            padding: 48px 0;
-            text-align: center;
-        }
-        
-        .hero h2 {
-            font-size: 2rem;
-            margin-bottom: 16px;
-        }
-        
-        .hero p {
-            font-size: 1.1rem;
-            opacity: 1;
-            color: var(--navy);
-            font-weight: 500;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
-        }
-        
-        .quick-info {
-            padding: 32px 0;
-            background: var(--light-gray);
-        }
-        
-        .cards-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-            margin-top: 24px;
-        }
-        
-        .card {
-            background: var(--white);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .card-icon {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background: var(--navy);
-            color: var(--white);
-            border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
-            margin-bottom: 12px;
-            font-size: 1.2rem;
-        }
-        
-        .card h3 {
-            color: var(--navy);
-            margin-bottom: 8px;
-            font-size: 1.2rem;
-        }
-        
-        .card p {
-            color: var(--text-gray);
-            margin-bottom: 4px;
-        }
-        
-        .card .highlight {
-            font-weight: 600;
-            color: var(--navy);
-            font-size: 1.1rem;
-            display: block;
-            margin-top: 8px;
-        }
-        
-        section {
-            padding: 32px 0;
-        }
-        
-        section:nth-child(even) {
-            background: var(--light-gray);
-        }
-        
-        h2 {
-            color: var(--navy);
-            font-size: 1.8rem;
-            margin-bottom: 24px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--navy);
-        }
-        
-        h3 {
-            color: var(--navy);
-            font-size: 1.3rem;
-            margin: 24px 0 16px;
-        }
-        
-        .collapsible {
-            background: var(--white);
-            border-radius: 8px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .collapsible-header {
-            padding: 16px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--white);
-            border: none;
-            width: 100%;
-            text-align: left;
-            font-size: 1.1rem;
-            color: var(--navy);
-            font-weight: 600;
-            border-radius: 8px;
-            transition: background 0.3s;
-        }
-        
-        .collapsible-header:hover {
-            background: var(--light-gray);
-        }
-        
-        .collapsible-header::after {
-            content: '+';
-            font-size: 1.5rem;
-            transition: transform 0.3s;
-        }
-        
-        .collapsible.active .collapsible-header::after {
-            transform: rotate(45deg);
-        }
-        
-        .collapsible-content {
-            display: none;
-            padding: 0 16px 16px;
-        }
-        
-        .collapsible.active .collapsible-content {
-            display: block;
-        }
-        
-        .list-item {
-            padding: 12px;
-            border-left: 3px solid var(--navy);
-            margin-bottom: 12px;
-            background: var(--white);
-        }
-        
-        .list-item strong {
-            color: var(--navy);
-            display: block;
-            margin-bottom: 4px;
-        }
-        
-        .list-item a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .list-item a:hover {
-            text-decoration: underline;
-        }
-        
-        .button {
-            display: inline-block;
-            padding: 12px 24px;
-            background: var(--navy);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: opacity 0.3s;
-        }
-        
-        .button:hover {
-            opacity: 0.9;
-        }
-        
-        .emergency {
-            background: #FFF3CD;
-            border-left: 4px solid var(--warning);
-            padding: 16px;
-            margin: 16px 0;
-            border-radius: 4px;
-        }
-        
-        .emergency strong {
-            color: #856404;
-        }
-        
-        footer {
-            background: var(--navy);
-            color: var(--white);
-            padding: 32px 0;
-            text-align: center;
-            margin-top: 48px;
-        }
-        
-        .paw-print {
-            font-size: 1.5rem;
-            margin: 0 8px;
-            opacity: 0.8;
-        }
-        
-        @media (min-width: 768px) {
-            .nav-toggle {
-                display: none;
-            }
-            
-            nav {
-                display: block;
-                position: static;
-                background: none;
-                border: none;
-            }
-            
-            nav ul {
-                display: flex;
-                gap: 24px;
-            }
-            
-            nav a {
-                padding: 8px 16px;
-                border: none;
-                border-radius: 4px;
-            }
-            
-            .cards-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .hero h2 {
-                font-size: 2.5rem;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .cards-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        
-        @media print {
-            header, nav, footer, .nav-toggle {
-                display: none;
-            }
-            
-            .collapsible-content {
-                display: block !important;
-            }
-            
-            .collapsible-header::after {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
+
 </head>
 <body>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
     <header>
         <div class="container">
             <div class="header-content">
                 <h1>320 West Whitehall</h1>
-                <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
-                <nav>
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">☰</button>
+                <nav id="main-nav">
                     <ul>
                         <li><a href="#quick-info">Quick Info</a></li>
                         <li><a href="#local-guide">Local Guide</a></li>
@@ -382,8 +31,8 @@
             </div>
         </div>
     </header>
-    
-    <section class="hero">
+
+    <section id="main-content" class="hero">
         <div class="container">
             <h2>Welcome to Happy Valley!</h2>
             <p>Your home away from home in State College, PA</p>
@@ -512,8 +161,8 @@
             <h2>Food & Drink Guide</h2>
             
             <div class="collapsible active">
-                <button class="collapsible-header">☕ Coffee & Cafés</button>
-                <div class="collapsible-content">
+                <button class="collapsible-header" aria-expanded="true" aria-controls="coffee-cafes">☕ Coffee & Cafés</button>
+                <div class="collapsible-content" id="coffee-cafes">
                     <div class="list-item">
                         <strong><a href="https://www.google.com/maps/search/Elixr+Coffee+State+College+PA" target="_blank">Elixr Coffee</a></strong>
                         Minimalist, high-quality espresso downtown. Perfect for coffee enthusiasts.
@@ -534,8 +183,8 @@
             </div>
             
             <div class="collapsible">
-                <button class="collapsible-header">🍽️ Restaurants</button>
-                <div class="collapsible-content">
+                <button class="collapsible-header" aria-expanded="false" aria-controls="restaurants">🍽️ Restaurants</button>
+                <div class="collapsible-content" id="restaurants">
                     <div class="list-item">
                         <strong><a href="https://www.google.com/maps/search/The+Waffle+Shop+State+College+PA" target="_blank">The Waffle Shop</a></strong>
                         Classic State College breakfast institution with multiple locations. Famous for their waffles and all-day breakfast. Gets busy but the line moves pretty fast.
@@ -580,8 +229,8 @@
             </div>
             
             <div class="collapsible">
-                <button class="collapsible-header">🍻 Breweries & Bars</button>
-                <div class="collapsible-content">
+                <button class="collapsible-header" aria-expanded="false" aria-controls="breweries-bars">🍻 Breweries & Bars</button>
+                <div class="collapsible-content" id="breweries-bars">
                     <div class="list-item">
                         <strong><a href="https://www.google.com/maps/search/Antifragile+Brewing+324+E+Calder+Way+State+College+PA" target="_blank">Antifragile Brewing Co.</a></strong>
                         324 E Calder Way - Downtown nano brewery with craft beer, kombucha, and cocktails. Cozy upstairs lounge. Home to Uncle John's Jawns cheesesteaks.
@@ -616,8 +265,8 @@
             <h2>Things to Do</h2>
             
             <div class="collapsible">
-                <button class="collapsible-header">🥾 Hiking & Nature</button>
-                <div class="collapsible-content">
+                <button class="collapsible-header" aria-expanded="false" aria-controls="hiking-nature">🥾 Hiking & Nature</button>
+                <div class="collapsible-content" id="hiking-nature">
                     <div class="list-item">
                         <strong><a href="https://www.google.com/maps/search/Mount+Nittany+Trail+State+College+PA" target="_blank">Mount Nittany</a></strong>
                         Iconic hike with overlooks of Beaver Stadium and the valley. 5 miles round trip, moderate difficulty.
@@ -642,8 +291,8 @@
             </div>
             
             <div class="collapsible">
-                <button class="collapsible-header">🎭 Attractions & Activities</button>
-                <div class="collapsible-content">
+                <button class="collapsible-header" aria-expanded="false" aria-controls="attractions">🎭 Attractions & Activities</button>
+                <div class="collapsible-content" id="attractions">
                     <div class="list-item">
                         <strong><a href="https://www.google.com/maps/search/Penn+State+Arboretum+State+College+PA" target="_blank">The Arboretum at Penn State</a></strong>
                         Free botanical gardens with beautiful walking paths and seasonal displays.
@@ -680,8 +329,8 @@
             </div>
             
             <div class="collapsible">
-                <button class="collapsible-header">🧺 Longer Stay Essentials</button>
-                <div class="collapsible-content">
+                <button class="collapsible-header" aria-expanded="false" aria-controls="longer-stay">🧺 Longer Stay Essentials</button>
+                <div class="collapsible-content" id="longer-stay">
                     <div class="list-item">
                         <strong>Coworking Spaces</strong>
                         <a href="https://www.google.com/maps/search/Happy+Valley+LaunchBox+State+College+PA" target="_blank">Happy Valley LaunchBox</a> - Free community space | 
@@ -739,8 +388,8 @@
             <h2>📅 Recommended Itineraries</h2>
             
             <div class="collapsible">
-                <button class="collapsible-header">Weekend Visit (1-3 nights)</button>
-                <div class="collapsible-content">
+                <button class="collapsible-header" aria-expanded="false" aria-controls="weekend-visit">Weekend Visit (1-3 nights)</button>
+                <div class="collapsible-content" id="weekend-visit">
                     <div class="list-item">
                         <strong>Day 1</strong>
                         Morning coffee at Elixr or Café Lemont, explore The Arboretum, lunch downtown, afternoon Mount Nittany hike, dinner at Cozy Thai or Tasty K
@@ -757,8 +406,8 @@
             </div>
             
             <div class="collapsible">
-                <button class="collapsible-header">Extended Stay (1-3 weeks)</button>
-                <div class="collapsible-content">
+                <button class="collapsible-header" aria-expanded="false" aria-controls="extended-stay">Extended Stay (1-3 weeks)</button>
+                <div class="collapsible-content" id="extended-stay">
                     <div class="list-item">
                         <strong>Week 1</strong>
                         Establish routine with morning coffee spots, explore all major hiking trails, try different restaurants each night, visit The Arboretum and Discovery Space
@@ -775,8 +424,8 @@
             </div>
             
             <div class="collapsible">
-                <button class="collapsible-header">Long-term Stay (1+ month)</button>
-                <div class="collapsible-content">
+                <button class="collapsible-header" aria-expanded="false" aria-controls="longterm-stay">Long-term Stay (1+ month)</button>
+                <div class="collapsible-content" id="longterm-stay">
                     <div class="list-item">
                         <strong>Establish Routines</strong>
                         Find your favorite coffee shop for work, join Happy Valley LaunchBox for coworking, weekly farmers market visits
@@ -803,55 +452,6 @@
         </div>
     </footer>
     
-    <script>
-        // Mobile navigation toggle
-        document.querySelector('.nav-toggle').addEventListener('click', function() {
-            document.querySelector('nav').classList.toggle('active');
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                
-                // Only handle internal links (starting with #)
-                if (href && href.startsWith('#')) {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        // Close mobile nav
-                        document.querySelector('nav').classList.remove('active');
-                        
-                        // Try smooth scroll, fallback to regular scroll
-                        try {
-                            target.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        } catch (error) {
-                            // Fallback for older browsers
-                            target.scrollIntoView();
-                        }
-                    }
-                }
-            });
-        });
-        
-        // Collapsible sections
-        document.querySelectorAll('.collapsible-header').forEach(header => {
-            header.addEventListener('click', function() {
-                this.parentElement.classList.toggle('active');
-            });
-        });
-        
-        // Service worker for offline capability (basic)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js').catch(() => {
-                    // Service worker registration failed, app will still work online
-                });
-            });
-        }
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>

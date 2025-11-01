@@ -1,8 +1,11 @@
 // Service Worker for offline capability
-const CACHE_NAME = '320-whitehall-v1';
+const CACHE_NAME = '320-whitehall-v2';
 const urlsToCache = [
   '/',
-  '/index.html'
+  '/index.html',
+  '/css/styles.css',
+  '/js/main.js',
+  '/favicon.svg'
 ];
 
 // Install event - cache essential files
