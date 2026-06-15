@@ -47,10 +47,6 @@ h1 {
     font-weight: 600;
 }
 
-.nav-toggle {
-    display: none;
-}
-
 nav {
     display: block;
 }
@@ -88,13 +84,6 @@ nav a:hover, nav a:focus {
     font-size: 2rem;
     margin-bottom: 16px;
     color: var(--white);
-}
-
-.hero p {
-    font-size: 1.1rem;
-    opacity: 0.95;
-    color: var(--white);
-    font-weight: 500;
 }
 
 .quick-info {
@@ -332,7 +321,7 @@ footer {
 }
 
 @media print {
-    header, nav, footer, .nav-toggle {
+    header, nav, footer {
         display: none;
     }
 
