@@ -1,5 +1,5 @@
 // Service Worker for offline capability
-const CACHE_NAME = '320-whitehall-v3';
+const CACHE_NAME = '320-whitehall-v4';
 // Relative paths so caching works under the GitHub Pages project
 // subpath (/320WWhitehall/) as well as a root deployment.
 const urlsToCache = [
@@ -7,41 +7,50 @@ const urlsToCache = [
   'index.html',
   'css/styles.css',
   'js/main.js',
-  'favicon.svg'
+  'favicon.svg',
+  'favicon.png'
 ];
 
-// Install event - cache essential files
+// Install event - cache essential files and activate immediately
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
+      .then(cache => cache.addAll(urlsToCache))
+      .then(() => self.skipWaiting())
   );
 });
 
-// Fetch event - serve from cache when offline
+// Fetch event - network first so content updates always reach
+// returning guests; fall back to the cache when offline
 self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET') {
+    return;
+  }
   event.respondWith(
-    caches.match(event.request)
+    fetch(event.request)
       .then(response => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request);
+        // Keep the offline copy fresh with each successful fetch
+        if (response.ok && event.request.url.startsWith(self.location.origin)) {
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, responseClone));
+        }
+        return response;
       })
       .catch(() => {
-        // Optional: Return a custom offline page
-        return new Response('Offline - Please check your connection', {
-          status: 503,
-          statusText: 'Service Unavailable',
-          headers: new Headers({
-            'Content-Type': 'text/plain'
-          })
+        return caches.match(event.request).then(response => {
+          return response || new Response('Offline - Please check your connection', {
+            status: 503,
+            statusText: 'Service Unavailable',
+            headers: new Headers({
+              'Content-Type': 'text/plain'
+            })
+          });
         });
       })
   );
 });
 
-// Activate event - clean up old caches
+// Activate event - clean up old caches and take control of open pages
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
@@ -53,6 +62,6 @@ self.addEventListener('activate', event => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });

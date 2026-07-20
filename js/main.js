@@ -27,7 +27,7 @@ document.querySelectorAll('nav a').forEach(anchor => {
 document.querySelectorAll('.collapsible-header').forEach(header => {
     header.addEventListener('click', function() {
         const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        this.parentElement.classList.toggle('active');
+        this.closest('.collapsible').classList.toggle('active');
         this.setAttribute('aria-expanded', !isExpanded);
     });
 });

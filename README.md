@@ -20,7 +20,7 @@ This single-page web application serves as a comprehensive guide for Airbnb gues
 ### User Experience
 - **Mobile-First Design**: Fully responsive layout optimized for phones, tablets, and desktops
 - **Collapsible Sections**: Organized content that expands on-demand to reduce scrolling
-- **Smooth Navigation**: Sticky header with quick-jump links to major sections
+- **Smooth Navigation**: Header with quick-jump links to major sections
 - **Offline Capability**: Service worker enables basic offline functionality after first visit
 - **QR Code Ready**: Designed for easy access via QR code for mobile guests
 
@@ -55,7 +55,8 @@ This single-page web application serves as a comprehensive guide for Airbnb gues
 ├── js/
 │   └── main.js             # JavaScript functionality
 ├── sw.js                   # Service Worker for offline support
-├── favicon.svg             # Paw print favicon
+├── favicon.svg             # Paw print favicon (SVG)
+├── favicon.png             # Paw print favicon (PNG fallback)
 ├── CLAUDE.md               # Design system and style guide
 └── README.md               # This file
 ```
@@ -218,4 +219,4 @@ For technical issues with the website, please [open an issue](https://github.com
 
 **We Are... Penn State! 🐾**
 
-*Last Updated: November 2025*
+*Last Updated: July 2026*

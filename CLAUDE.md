@@ -124,9 +124,9 @@ Static HTML page for Airbnb guests staying at a State College, PA property. The 
 - ✅ **Skip-to-content link** appears on keyboard focus for easy navigation
 
 ## Performance Goals (Achieved)
-- ✅ **Page load time**: < 3 seconds (28KB HTML + 6KB CSS + 1.9KB JS)
+- ✅ **Page load time**: < 3 seconds (~30KB HTML + ~6KB CSS + ~1.5KB JS)
 - ✅ **Total page size**: < 100KB (well under 2MB target)
-- ✅ **HTTP requests minimized**: Only 4 files (HTML, CSS, JS, favicon)
+- ✅ **HTTP requests minimized**: Only 5 files (HTML, CSS, JS, favicons)
 - ✅ **External CSS/JS**: Allows browser caching for repeat visits
 - ✅ **Service Worker**: Caches all assets for offline functionality
 - ✅ **No external dependencies**: Zero third-party libraries
@@ -134,13 +134,14 @@ Static HTML page for Airbnb guests staying at a State College, PA property. The 
 ## File Structure (Implemented)
 ```
 /
-├── index.html          (28KB - main page)
+├── index.html          (~30KB - main page)
 ├── css/
-│   └── styles.css      (6KB - all styles)
+│   └── styles.css      (~6KB - all styles)
 ├── js/
-│   └── main.js         (1.9KB - all JavaScript)
-├── sw.js               (1.4KB - service worker)
-├── favicon.svg         (paw print)
+│   └── main.js         (~1.5KB - all JavaScript)
+├── sw.js               (~1.7KB - service worker)
+├── favicon.svg         (paw print, SVG)
+├── favicon.png         (paw print, PNG fallback)
 ├── README.md           (comprehensive documentation)
 └── CLAUDE.md           (this style guide)
 ```
@@ -261,7 +262,7 @@ Static HTML page for Airbnb guests staying at a State College, PA property. The 
 - ~~Mobile navigation toggle~~ (removed - navigation always visible)
 - Smooth scroll to sections with browser fallbacks
 - Collapsible content sections with ARIA state management
-- Service worker registration for offline caching (v2)
+- Service worker registration for offline caching (v4, network-first)
 - Browser compatibility fallbacks for older browsers
 
 ### Performance & Accessibility (November 2025)
@@ -421,5 +422,30 @@ Welcome to Happy Valley!
 
 ---
 
-*Last Updated: November 1, 2025*
+## July 2026 Site Audit & Fixes
+
+### Audit
+Three parallel audits (static code, live deployment, all external links) found zero broken functionality, zero broken links (50 unique external URLs all returning 200), and full ARIA correctness. Fixes below address the findings.
+
+### Service Worker: Network-First (v4)
+**Problem**: v3 was cache-first with no revalidation — a content-only deploy that didn't bump `CACHE_NAME` would never reach returning guests (stale WiFi password risk).
+**Solution**: Rewrote fetch handler to network-first with cache fallback; the cache is refreshed on every successful fetch. Added `skipWaiting()` on install and `clients.claim()` on activate so new SW versions take effect immediately. Content deploys no longer require a cache-name bump (only bump when the precache file list changes).
+
+### Accessibility Enhancement
+- All 9 collapsible section buttons are now wrapped in `<h3 class="collapsible-heading">` so screen-reader users can navigate them by heading. `main.js` updated to use `closest('.collapsible')` (the button's parent is now the h3).
+
+### Other Fixes
+- **Favicon**: Added `favicon.png` (64×64 raster) as fallback since emoji-in-SVG favicons render inconsistently on some browsers; removed the two `<link>` tags that declared `type="image/png"` while pointing at the SVG.
+- **Section striping**: Replaced fragile `section:nth-child(even)` with an explicit `.section-alt` class (fixes three-gray-sections-in-a-row near the top; alternation now survives reordering). Household section's inline styles moved to classes (`.cards-grid.auto-fit`).
+- **Heading/nav alignment**: "Quick Essentials" h2 renamed to "Local Guide" to match its nav link.
+- **Links**: Penn's Cave Maps query corrected to `Penns+Cave+Centre+Hall+PA` (it's in Centre Hall, not State College); bus-stop Maps query now targets Waupelani Drive (where the stop actually is, through the Hearthside lot) and a CATA schedules link was added.
+- **Dead code**: Removed unused `.button` CSS rules.
+- **Docs**: README "Sticky header" claim corrected; stale size/version metrics refreshed.
+
+### Content freshness (checked mid-2026)
+All listed businesses verified open. Watch item: Voodoo Brewing's parent brand is in bankruptcy restructuring (Lemont pub open as of May 2026) — recheck before football season.
+
+---
+
+*Last Updated: July 20, 2026*
 *All changes deployed to: https://jw41784.github.io/320WWhitehall/*
