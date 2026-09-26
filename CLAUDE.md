@@ -456,7 +456,7 @@ All listed businesses verified open. Watch item: Voodoo Brewing's parent brand i
 - **Property address** added to the Check-In card with a Google Maps link (it had been dropped from the hero in Nov 2025 and was not on the page anywhere).
 - **Tappable phone numbers**: 911 and Mount Nittany Medical Center now use `tel:` links; the hospital name links to Maps.
 - **WiFi QR code**: inline SVG (generated with `segno`, encodes `WIFI:T:WPA;S:SweetSuite;P:whitehall;;`). Regenerate if the password changes.
-- **Before You Leave card** in Household Essentials with a four-item check-out list. Hosts should verify the thermostat and dishwasher wording matches the house.
+- **Before You Leave card** in Household Essentials with a four-item check-out list. No dishwasher in the unit; the list asks guests to hand-wash dishes.
 - **Weather link** (NWS State College point forecast) under Things to Do.
 - **Game Day**: shuttle link now points at CATA's game-day page; noted that Blue Loop / White Loop are fare-free. Fares ($2.50 / $7 day pass) verified Sept 2026.
 - **Voodoo Brewing**: added "Call ahead to confirm hours" (parent company closing other locations; Lemont pub still open).
