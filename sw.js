@@ -1,5 +1,5 @@
 // Service Worker for offline capability
-const CACHE_NAME = '320-whitehall-v4';
+const CACHE_NAME = '320-whitehall-v5';
 // Relative paths so caching works under the GitHub Pages project
 // subpath (/320WWhitehall/) as well as a root deployment.
 const urlsToCache = [
@@ -8,7 +8,10 @@ const urlsToCache = [
   'css/styles.css',
   'js/main.js',
   'favicon.svg',
-  'favicon.png'
+  'favicon.png',
+  'manifest.webmanifest',
+  'icons/icon-192.png',
+  'icons/icon-512.png'
 ];
 
 // Install event - cache essential files and activate immediately

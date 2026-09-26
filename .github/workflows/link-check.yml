@@ -1,0 +1,41 @@
+name: Link check
+
+# Runs on the first of every month and on demand. Opens (or updates) a
+# GitHub issue listing any external link in index.html that no longer
+# resolves, so dead links are caught before a guest finds them.
+on:
+  schedule:
+    - cron: '0 12 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check links
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --accept 200..206,301,302,307,308,429
+            --max-retries 3
+            --timeout 30
+            --user-agent "Mozilla/5.0 (link-check; +https://github.com/jw41784/320WWhitehall)"
+            index.html
+          output: lychee/out.md
+          fail: false
+
+      - name: Open issue if links are broken
+        if: steps.lychee.outputs.exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: 'Broken links found on guest page'
+          content-filepath: lychee/out.md
+          labels: links, automated

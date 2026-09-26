@@ -15,6 +15,18 @@
     box-sizing: border-box;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition: none !important;
+    }
+}
+
 body {
     font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
     color: var(--text-gray);
@@ -141,6 +153,37 @@ nav a:hover, nav a:focus {
     margin-top: 8px;
 }
 
+.card .checklist {
+    margin: 8px 0 0 20px;
+}
+
+.card .checklist li {
+    margin-bottom: 4px;
+}
+
+.wifi-qr {
+    display: block;
+    width: 132px;
+    height: 132px;
+    margin: 16px auto 0;
+    border: 1px solid var(--light-gray);
+    border-radius: 4px;
+}
+
+.wifi-qr-caption {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--medium-gray);
+}
+
+.section-intro {
+    margin: -8px 0 24px;
+}
+
+.section-intro a {
+    color: var(--accent-blue);
+}
+
 section {
     padding: 32px 0;
 }
@@ -170,10 +213,6 @@ h3 {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.collapsible-heading {
-    margin: 0;
-}
-
 .collapsible-header {
     padding: 16px;
     cursor: pointer;
@@ -181,14 +220,20 @@ h3 {
     justify-content: space-between;
     align-items: center;
     background: var(--white);
-    border: none;
-    width: 100%;
-    text-align: left;
+    list-style: none;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.collapsible-header::-webkit-details-marker {
+    display: none;
+}
+
+.collapsible-header h3 {
+    margin: 0;
     font-size: 1.1rem;
     color: var(--navy);
     font-weight: 600;
-    border-radius: 8px;
-    transition: background 0.3s;
 }
 
 .collapsible-header:hover {
@@ -198,20 +243,16 @@ h3 {
 .collapsible-header::after {
     content: '+';
     font-size: 1.5rem;
+    color: var(--navy);
     transition: transform 0.3s;
 }
 
-.collapsible.active .collapsible-header::after {
+.collapsible[open] > .collapsible-header::after {
     transform: rotate(45deg);
 }
 
 .collapsible-content {
-    display: none;
     padding: 0 16px 16px;
-}
-
-.collapsible.active .collapsible-content {
-    display: block;
 }
 
 .list-item {
@@ -237,7 +278,7 @@ h3 {
     text-decoration: underline;
 }
 
-.emergency {
+.emergency, .notice {
     background: #FFF3CD;
     border-left: 4px solid var(--warning);
     padding: 16px;
@@ -245,8 +286,13 @@ h3 {
     border-radius: 4px;
 }
 
-.emergency strong {
+.emergency strong, .notice strong {
     color: #856404;
+}
+
+.emergency a {
+    color: #856404;
+    font-weight: 600;
 }
 
 footer {
@@ -255,6 +301,12 @@ footer {
     padding: 32px 0;
     text-align: center;
     margin-top: 48px;
+}
+
+.footer-tip {
+    font-size: 0.875rem;
+    opacity: 0.8;
+    margin-top: 8px;
 }
 
 .paw-print {
@@ -318,11 +370,9 @@ footer {
         display: none;
     }
 
-    .collapsible-content {
-        display: block !important;
-    }
-
-    .collapsible-header::after {
+    .collapsible-header::after,
+    .wifi-qr-caption,
+    .footer-tip {
         display: none;
     }
 }

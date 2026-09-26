@@ -119,14 +119,14 @@ Static HTML page for Airbnb guests staying at a State College, PA property. The 
 - ✅ **Color contrast** meets 4.5:1 minimum (hero h2 explicitly set to white)
 - ✅ **Keyboard navigation** fully supported with skip-to-content link
 - ✅ **Focus indicators** visible on all interactive elements
-- ✅ **ARIA labels** on all 9 collapsible sections with unique IDs
-- ✅ **Screen reader support** with proper aria-expanded states
+- ✅ **Native `<details>/<summary>`** for all 9 collapsible sections (accessible without JavaScript)
+- ✅ **Screen reader support** via native disclosure semantics
 - ✅ **Skip-to-content link** appears on keyboard focus for easy navigation
 
 ## Performance Goals (Achieved)
 - ✅ **Page load time**: < 3 seconds (~30KB HTML + ~6KB CSS + ~1.5KB JS)
 - ✅ **Total page size**: < 100KB (well under 2MB target)
-- ✅ **HTTP requests minimized**: Only 5 files (HTML, CSS, JS, favicons)
+- ✅ **HTTP requests minimized**: HTML, CSS, JS, favicon, manifest (icons load only on install)
 - ✅ **External CSS/JS**: Allows browser caching for repeat visits
 - ✅ **Service Worker**: Caches all assets for offline functionality
 - ✅ **No external dependencies**: Zero third-party libraries
@@ -139,9 +139,12 @@ Static HTML page for Airbnb guests staying at a State College, PA property. The 
 │   └── styles.css      (~6KB - all styles)
 ├── js/
 │   └── main.js         (~1.5KB - all JavaScript)
-├── sw.js               (~1.7KB - service worker)
-├── favicon.svg         (paw print, SVG)
+├── sw.js               (~2KB - service worker)
+├── manifest.webmanifest (add-to-home-screen)
+├── icons/              (icon-192.png, icon-512.png)
+├── favicon.svg         (paw print, vector)
 ├── favicon.png         (paw print, PNG fallback)
+├── .github/workflows/link-check.yml (monthly dead-link check)
 ├── README.md           (comprehensive documentation)
 └── CLAUDE.md           (this style guide)
 ```
@@ -447,5 +450,35 @@ All listed businesses verified open. Watch item: Voodoo Brewing's parent brand i
 
 ---
 
-*Last Updated: July 20, 2026*
+## September 2026 Upgrades
+
+### Guest-facing
+- **Property address** added to the Check-In card with a Google Maps link (it had been dropped from the hero in Nov 2025 and was not on the page anywhere).
+- **Tappable phone numbers**: 911 and Mount Nittany Medical Center now use `tel:` links; the hospital name links to Maps.
+- **WiFi QR code**: inline SVG (generated with `segno`, encodes `WIFI:T:WPA;S:SweetSuite;P:whitehall;;`). Regenerate if the password changes.
+- **Before You Leave card** in Household Essentials with a four-item check-out list. Hosts should verify the thermostat and dishwasher wording matches the house.
+- **Weather link** (NWS State College point forecast) under Things to Do.
+- **Game Day**: shuttle link now points at CATA's game-day page; noted that Blue Loop / White Loop are fare-free. Fares ($2.50 / $7 day pass) verified Sept 2026.
+- **Voodoo Brewing**: added "Call ahead to confirm hours" (parent company closing other locations; Lemont pub still open).
+- **Footer**: add-to-home-screen tip and a visible "Last updated" date.
+
+### Privacy
+- `<meta name="robots" content="noindex, nofollow">` added because the WiFi password is on a public page. The repo itself is still public; moving the password into the Airbnb app is the stronger option if desired.
+
+### Code
+- **Collapsibles are native `<details>/<summary>`** (summary wraps the h3). Content is visible without JavaScript. `main.js` now only opens all sections on `beforeprint` (and restores them after) and registers the service worker.
+- **Smooth scrolling moved to CSS** (`scroll-behavior: smooth` behind `prefers-reduced-motion: no-preference`); transitions are disabled under `prefers-reduced-motion: reduce`.
+- **Installable**: `manifest.webmanifest`, `theme-color`, `apple-touch-icon`, and 192/512px icons. Service worker bumped to v5 to precache them.
+- **Favicon** is now a true vector paw (ellipses), fixing the emoji-in-SVG rendering inconsistency; `favicon.png` regenerated from it.
+- **Open Graph** title/description/url for clean link previews when texted to guests.
+- `.notice` class for the Game Day callout (`.emergency` reserved for real emergencies; same visual style).
+
+### Maintenance
+- **`.github/workflows/link-check.yml`**: lychee runs monthly (and on demand) and opens a GitHub issue listing broken links. Addresses the goo.gl-style silent breakage.
+- `additional instructions.md` (original notes with dead goo.gl links, previously served publicly) removed; recoverable from git history.
+- `.claude/settings.local.json` untracked and gitignored.
+
+---
+
+*Last Updated: September 26, 2026*
 *All changes deployed to: https://jw41784.github.io/320WWhitehall/*

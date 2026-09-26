@@ -19,8 +19,10 @@ This single-page web application serves as a comprehensive guide for Airbnb gues
 
 ### User Experience
 - **Mobile-First Design**: Fully responsive layout optimized for phones, tablets, and desktops
-- **Collapsible Sections**: Organized content that expands on-demand to reduce scrolling
-- **Smooth Navigation**: Header with quick-jump links to major sections
+- **Collapsible Sections**: Native `<details>` elements that work with or without JavaScript
+- **Smooth Navigation**: Header with quick-jump links to major sections (CSS scroll-behavior, respects reduced-motion)
+- **WiFi QR Code**: Guests scan an inline QR code to join the network without typing
+- **Installable**: Web manifest lets guests add the guide to their home screen
 - **Offline Capability**: Service worker enables basic offline functionality after first visit
 - **QR Code Ready**: Designed for easy access via QR code for mobile guests
 
@@ -32,7 +34,7 @@ This single-page web application serves as a comprehensive guide for Airbnb gues
 - **Descriptive Links**: All links have clear, contextual labels
 
 ### Performance
-- **Fast Loading**: ~28KB HTML, optimized for quick loading on mobile networks
+- **Fast Loading**: ~34KB HTML, optimized for quick loading on mobile networks
 - **Cacheable Resources**: Separate CSS and JavaScript files for efficient caching
 - **Service Worker**: Progressive Web App features with offline support
 - **Minimal Dependencies**: No external frameworks or libraries
@@ -55,8 +57,14 @@ This single-page web application serves as a comprehensive guide for Airbnb gues
 ├── js/
 │   └── main.js             # JavaScript functionality
 ├── sw.js                   # Service Worker for offline support
-├── favicon.svg             # Paw print favicon (SVG)
+├── manifest.webmanifest    # Web app manifest (add to home screen)
+├── icons/
+│   ├── icon-192.png        # Home-screen icon
+│   └── icon-512.png        # Home-screen / maskable icon
+├── favicon.svg             # Paw print favicon (vector)
 ├── favicon.png             # Paw print favicon (PNG fallback)
+├── .github/workflows/
+│   └── link-check.yml      # Monthly external link check (opens an issue on failures)
 ├── CLAUDE.md               # Design system and style guide
 └── README.md               # This file
 ```
@@ -140,7 +148,7 @@ To use a custom domain:
 
 ### Updating Content
 
-- **WiFi/Door Code**: Edit the "Essential Information" section in `index.html`
+- **WiFi/Door Code**: Edit the "Essential Information" section in `index.html`. If the WiFi password changes, regenerate the QR code (encodes `WIFI:T:WPA;S:<network>;P:<password>;;`, e.g. with the `segno` Python package) and replace the `<svg class="wifi-qr">` path data
 - **Restaurants/Attractions**: Modify collapsible sections in the Food & Drink and Activities areas
 - **Styling**: Update `css/styles.css` to change colors, fonts, or layout
 - **Functionality**: Modify `js/main.js` for interactive features
@@ -150,7 +158,7 @@ To use a custom domain:
 1. Add new HTML section in `index.html`
 2. Add navigation link in the header
 3. Add corresponding styles in `css/styles.css`
-4. Update Service Worker cache version in `sw.js`
+4. Bump the Service Worker cache version in `sw.js` only if you add new files to the precache list
 
 ## 📊 Accessibility Features
 
@@ -165,8 +173,8 @@ To use a custom domain:
 
 ## 🌟 Key Sections
 
-1. **Quick Info**: WiFi, check-in/out, parking, emergency contacts
-2. **Household Essentials**: Trash pickup, laundry, bus stop information
+1. **Quick Info**: WiFi (with QR code), check-in/out, address, parking, emergency contacts
+2. **Household Essentials**: Trash pickup, laundry, bus stop, check-out checklist
 3. **Local Guide**: Groceries, coffee shops, quick eats, breweries
 4. **Food & Drink**: Comprehensive restaurant and bar listings with Google Maps links
 5. **Activities**: Hiking trails, attractions, family-friendly activities
@@ -219,4 +227,4 @@ For technical issues with the website, please [open an issue](https://github.com
 
 **We Are... Penn State! 🐾**
 
-*Last Updated: July 2026*
+*Last Updated: September 2026*

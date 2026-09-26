@@ -1,42 +1,31 @@
-// Smooth scrolling for navigation links
-document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
+// Collapsible sections use native <details>/<summary>, and navigation
+// scrolling is handled by CSS scroll-behavior, so no JavaScript is
+// needed for either. Everything below is progressive enhancement.
 
-        // Only handle internal links (starting with #)
-        if (href && href.startsWith('#')) {
-            e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) {
-                // Try smooth scroll, fallback to regular scroll
-                try {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                } catch (error) {
-                    // Fallback for older browsers
-                    target.scrollIntoView();
-                }
-            }
+// Open every collapsible section for printing, then restore afterwards
+const collapsibles = document.querySelectorAll('details.collapsible');
+let openedForPrint = [];
+
+window.addEventListener('beforeprint', () => {
+    openedForPrint = [];
+    collapsibles.forEach(d => {
+        if (!d.open) {
+            d.open = true;
+            openedForPrint.push(d);
         }
     });
 });
 
-// Collapsible sections
-document.querySelectorAll('.collapsible-header').forEach(header => {
-    header.addEventListener('click', function() {
-        const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        this.closest('.collapsible').classList.toggle('active');
-        this.setAttribute('aria-expanded', !isExpanded);
-    });
+window.addEventListener('afterprint', () => {
+    openedForPrint.forEach(d => { d.open = false; });
+    openedForPrint = [];
 });
 
-// Service worker for offline capability (basic)
+// Service worker for offline capability
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js').catch(() => {
-            // Service worker registration failed, app will still work online
+            // Registration failed; the page still works online
         });
     });
 }
